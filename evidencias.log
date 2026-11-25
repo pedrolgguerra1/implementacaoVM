@@ -1,0 +1,41 @@
+Script started on 2026-11-24 22:20:13-03:00 [TERM="xterm-256color" TTY="/dev/pts/0" COLUMNS="112" LINES="12"]
+[?2004h]0;dev@PCdePedroGuerra: /mnt/c/Users/Guerra/Downloads/plgg/implementacaoVM[01;32mdev@PCdePedroGuerra[00m:[01;34m/mnt/c/Users/Guerra/Downloads/plgg/implementacaoVM[00m$ pwd
+[?2004l/mnt/c/Users/Guerra/Downloads/plgg/implementacaoVM
+[?2004h]0;dev@PCdePedroGuerra: /mnt/c/Users/Guerra/Downloads/plgg/implementacaoVM[01;32mdev@PCdePedroGuerra[00m:[01;34m/mnt/c/Users/Guerra/Downloads/plgg/implementacaoVM[00m$ date
+[?2004lTue Nov 24 22:20:37 -03 2026
+[?2004h]0;dev@PCdePedroGuerra: /mnt/c/Users/Guerra/Downloads/plgg/implementacaoVM[01;32mdev@PCdePedroGuerra[00m:[01;34m/mnt/c/Users/Guerra/Downloads/plgg/implementacaoVM[00m$ whoami
+[?2004ldev
+[?2004h]0;dev@PCdePedroGuerra: /mnt/c/Users/Guerra/Downloads/plgg/implementacaoVM[01;32mdev@PCdePedroGuerra[00m:[01;34m/mnt/c/Users/Guerra/Downloads/plgg/implementacaoVM[00m$ make
+[?2004lgcc -Wall -Wextra -std=c11 -O2 -D_POSIX_C_SOURCE=200809L -o vm main.c validate.c pager.c
+[?2004h]0;dev@PCdePedroGuerra: /mnt/c/Users/Guerra/Downloads/plgg/implementacaoVM[01;32mdev@PCdePedroGuerra[00m:[01;34m/mnt/c/Users/Guerra/Downloads/plgg/implementacaoVM[00m$ makewhoami[2Pdate[1Ppwdmake clean[1Ptestcleanscript -q evidencias.log[9Pcd deadlock_SO/exit[Kcd deadlock_SO/script -q evidencias.log[14Pmake clean[1Ptestcleanpwd[Kdatewhoami[2Pmake[K[7m./vm addresses.txt lru fifo[27m./vm addresses.txt lru fifo
+[?2004lConcluido: 1000 enderecos traduzidos, 539 page faults. Saida em correct.txt
+[?2004h]0;dev@PCdePedroGuerra: /mnt/c/Users/Guerra/Downloads/plgg/implementacaoVM[01;32mdev@PCdePedroGuerra[00m:[01;34m/mnt/c/Users/Guerra/Downloads/plgg/implementacaoVM[00m$ make clean
+[?2004lrm -f vm vm_256 *.o
+[?2004h]0;dev@PCdePedroGuerra: /mnt/c/Users/Guerra/Downloads/plgg/implementacaoVM[01;32mdev@PCdePedroGuerra[00m:[01;34m/mnt/c/Users/Guerra/Downloads/plgg/implementacaoVM[00m$ make
+[?2004lgcc -Wall -Wextra -std=c11 -O2 -D_POSIX_C_SOURCE=200809L -o vm main.c validate.c pager.c tlb.c
+[?2004h]0;dev@PCdePedroGuerra: /mnt/c/Users/Guerra/Downloads/plgg/implementacaoVM[01;32mdev@PCdePedroGuerra[00m:[01;34m/mnt/c/Users/Guerra/Downloads/plgg/implementacaoVM[00m$ make clean./vm addresses.txt lru fifo
+[?2004lConcluido: 1000 enderecos traduzidos, 537 page faults. Saida em correct.txt
+[?2004h]0;dev@PCdePedroGuerra: /mnt/c/Users/Guerra/Downloads/plgg/implementacaoVM[01;32mdev@PCdePedroGuerra[00m:[01;34m/mnt/c/Users/Guerra/Downloads/plgg/implementacaoVM[00m$ make clean && na[K[Kmake
+[?2004lrm -f vm vm_notlb256 vm_notlb128 *.o
+gcc -Wall -Wextra -std=c11 -O2 -D_POSIX_C_SOURCE=200809L -o vm main.c validate.c pager.c tlb.c
+[?2004h]0;dev@PCdePedroGuerra: /mnt/c/Users/Guerra/Downloads/plgg/implementacaoVM[01;32mdev@PCdePedroGuerra[00m:[01;34m/mnt/c/Users/Guerra/Downloads/plgg/implementacaoVM[00m$ make clean && make./vm addresses.txt lru fifo
+[?2004lSegmentation fault (core dumped)
+[?2004h]0;dev@PCdePedroGuerra: /mnt/c/Users/Guerra/Downloads/plgg/implementacaoVM[01;32mdev@PCdePedroGuerra[00m:[01;34m/mnt/c/Users/Guerra/Downloads/plgg/implementacaoVM[00m$ make clean
+[?2004lrm -f vm vm_notlb256 vm_notlb128 *.o
+[?2004h]0;dev@PCdePedroGuerra: /mnt/c/Users/Guerra/Downloads/plgg/implementacaoVM[01;32mdev@PCdePedroGuerra[00m:[01;34m/mnt/c/Users/Guerra/Downloads/plgg/implementacaoVM[00m$ make
+[?2004lgcc -Wall -Wextra -std=c11 -O2 -D_POSIX_C_SOURCE=200809L -o vm main.c validate.c pager.c tlb.c
+[?2004h]0;dev@PCdePedroGuerra: /mnt/c/Users/Guerra/Downloads/plgg/implementacaoVM[01;32mdev@PCdePedroGuerra[00m:[01;34m/mnt/c/Users/Guerra/Downloads/plgg/implementacaoVM[00m$ make clean./vm addresses.txt lru fifo
+[?2004lConcluido: 1000 enderecos traduzidos, 539 page faults. Saida em correct.txt
+[?2004h]0;dev@PCdePedroGuerra: /mnt/c/Users/Guerra/Downloads/plgg/implementacaoVM[01;32mdev@PCdePedroGuerra[00m:[01;34m/mnt/c/Users/Guerra/Downloads/plgg/implementacaoVM[00m$ make clean
+[?2004lrm -f vm vm_notlb256 vm_notlb128 *.o
+[?2004h]0;dev@PCdePedroGuerra: /mnt/c/Users/Guerra/Downloads/plgg/implementacaoVM[01;32mdev@PCdePedroGuerra[00m:[01;34m/mnt/c/Users/Guerra/Downloads/plgg/implementacaoVM[00m$ make
+[?2004lgcc -Wall -Wextra -std=c11 -O2 -D_POSIX_C_SOURCE=200809L -pthread -o vm main.c validate.c pager.c tlb.c
+[?2004h]0;dev@PCdePedroGuerra: /mnt/c/Users/Guerra/Downloads/plgg/implementacaoVM[01;32mdev@PCdePedroGuerra[00m:[01;34m/mnt/c/Users/Guerra/Downloads/plgg/implementacaoVM[00m$ make clean./vm addresses.txt lru fifo
+[?2004lConcluido: 1000 enderecos traduzidos, 539 page faults, 54 TLB hits. Saida em correct.txt
+Threads de busca na TLB criadas: 16000
+[?2004h]0;dev@PCdePedroGuerra: /mnt/c/Users/Guerra/Downloads/plgg/implementacaoVM[01;32mdev@PCdePedroGuerra[00m:[01;34m/mnt/c/Users/Guerra/Downloads/plgg/implementacaoVM[00m$ make clean
+[?2004lrm -f vm
+[?2004h]0;dev@PCdePedroGuerra: /mnt/c/Users/Guerra/Downloads/plgg/implementacaoVM[01;32mdev@PCdePedroGuerra[00m:[01;34m/mnt/c/Users/Guerra/Downloads/plgg/implementacaoVM[00m$ exit
+[?2004lexit
+
+Script done on 2026-11-24 23:16:56-03:00 [COMMAND_EXIT_CODE="0"]

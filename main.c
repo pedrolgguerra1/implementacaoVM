@@ -40,7 +40,7 @@ int main(int argc, char *argv[])
         return EXIT_FAILURE;
     }
 
-    const char *out_path = getenv("VM_OUT");     /* so para os testes; padrao: correct.txt */
+    const char *out_path = getenv("VM_OUT");
     if (!out_path || !*out_path)
         out_path = OUTPUT_FILE;
     FILE *out = fopen(out_path, "w");
@@ -70,7 +70,7 @@ int main(int argc, char *argv[])
         if (slot >= 0) {
             tlb_hits++;
             pager_touch(frame, now);
-        } else {                         
+        } else {
             frame = pager_translate(page, now, &fault, &evicted);
             faults += fault;
             if (evicted >= 0)
@@ -95,6 +95,10 @@ int main(int argc, char *argv[])
 
     fclose(out);
     free(addrs);
-    printf("Concluido: %zu enderecos traduzidos, %ld page faults. Saida em %s\n", n, faults, out_path);
+    printf("Concluido: %zu enderecos traduzidos, %ld page faults, %ld TLB hits. Saida em %s\n",
+           n, faults, tlb_hits, out_path);
+#if USE_TLB
+    printf("Threads de busca na TLB criadas: %lu\n", tlb_threads_created());
+#endif
     return EXIT_SUCCESS;
 }

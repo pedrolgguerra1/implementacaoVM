@@ -19,6 +19,10 @@
 #define USE_TLB 1
 #endif
 
+#ifndef TLB_THREADS
+#define TLB_THREADS 1
+#endif
+
 #define BACKING_FILE "BACKING_STORE.bin"
 #define OUTPUT_FILE  "correct.txt"
 
@@ -36,5 +40,6 @@ void tlb_init(alg_t alg);
 int  tlb_lookup(int page, unsigned long long now, int *frame);
 int  tlb_insert(int page, int frame, unsigned long long now);
 void tlb_invalidate(int page);
+unsigned long tlb_threads_created(void);
 
 #endif
