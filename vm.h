@@ -1,0 +1,29 @@
+#ifndef VM_H
+#define VM_H
+
+#include <stddef.h>
+#include <stdint.h>
+
+#define PAGE_SIZE    256
+#define NUM_PAGES    256
+#define OFFSET_MASK  0xFF
+#define BACKING_SIZE (NUM_PAGES * PAGE_SIZE)
+
+#ifndef FRAMES
+#define FRAMES 128
+#endif
+
+#define BACKING_FILE "BACKING_STORE.bin"
+#define OUTPUT_FILE  "correct.txt"
+
+typedef enum { ALG_FIFO, ALG_LRU } alg_t;
+
+int parse_alg(const char *text, alg_t *alg);
+int load_addresses(const char *path, uint32_t **addrs, size_t *count);
+
+int  pager_init(alg_t alg, const char *backing_path);
+int  pager_translate(int page, unsigned long long now, int *fault, int *evicted_page);
+void pager_touch(int frame, unsigned long long now);
+signed char pager_read(int frame, int offset);
+
+#endif
