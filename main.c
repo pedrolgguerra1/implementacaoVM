@@ -29,7 +29,6 @@ int main(int argc, char *argv[])
         usage(argv[0]);
         return EXIT_FAILURE;
     }
-    (void)tlb_alg;
 
     uint32_t *addrs = NULL;
     size_t n = 0;
@@ -41,7 +40,7 @@ int main(int argc, char *argv[])
         return EXIT_FAILURE;
     }
 
-    const char *out_path = getenv("VM_OUT");
+    const char *out_path = getenv("VM_OUT");     /* so para os testes; padrao: correct.txt */
     if (!out_path || !*out_path)
         out_path = OUTPUT_FILE;
     FILE *out = fopen(out_path, "w");
@@ -51,26 +50,48 @@ int main(int argc, char *argv[])
         return EXIT_FAILURE;
     }
 
-    long faults = 0;
+#if USE_TLB
+    tlb_init(tlb_alg);
+#else
+    (void)tlb_alg;
+#endif
+
+    long faults = 0, tlb_hits = 0;
     for (size_t i = 0; i < n; i++) {
         uint32_t va = addrs[i];
         int page = (int)((va >> 8) & 0xFF);
         int off  = (int)(va & OFFSET_MASK);
-        int fault, evicted;
+        int fault, evicted, frame;
+        unsigned long long now = i + 1;
+        int slot = -1;
 
-        int frame = pager_translate(page, i + 1, &fault, &evicted);
+#if USE_TLB
+        slot = tlb_lookup(page, now, &frame);
+        if (slot >= 0) {
+            tlb_hits++;
+            pager_touch(frame, now);
+        } else {                         
+            frame = pager_translate(page, now, &fault, &evicted);
+            faults += fault;
+            if (evicted >= 0)
+                tlb_invalidate(evicted);
+            slot = tlb_insert(page, frame, now);
+        }
+#else
+        frame = pager_translate(page, now, &fault, &evicted);
         faults += fault;
+#endif
 
         unsigned pa = (unsigned)frame * PAGE_SIZE + (unsigned)off;
         fprintf(out, "Virtual address: %u TLB: %d Physical address: %u Value: %d\n",
-                va, -1, pa, pager_read(frame, off));
+                va, slot, pa, pager_read(frame, off));
     }
 
     fprintf(out, "Number of Translated Addresses = %zu\n", n);
     fprintf(out, "Page Faults = %ld\n", faults);
     fprintf(out, "Page Fault Rate = %.3f\n", (double)faults / (double)n);
-    fprintf(out, "TLB Hits = %d\n", 0);
-    fprintf(out, "TLB Hit Rate = %.3f\n", 0.0);
+    fprintf(out, "TLB Hits = %ld\n", tlb_hits);
+    fprintf(out, "TLB Hit Rate = %.3f\n", (double)tlb_hits / (double)n);
 
     fclose(out);
     free(addrs);

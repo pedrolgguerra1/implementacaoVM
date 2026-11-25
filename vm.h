@@ -13,6 +13,12 @@
 #define FRAMES 128
 #endif
 
+#define TLB_SIZE 16
+
+#ifndef USE_TLB
+#define USE_TLB 1
+#endif
+
 #define BACKING_FILE "BACKING_STORE.bin"
 #define OUTPUT_FILE  "correct.txt"
 
@@ -25,5 +31,10 @@ int  pager_init(alg_t alg, const char *backing_path);
 int  pager_translate(int page, unsigned long long now, int *fault, int *evicted_page);
 void pager_touch(int frame, unsigned long long now);
 signed char pager_read(int frame, int offset);
+
+void tlb_init(alg_t alg);
+int  tlb_lookup(int page, unsigned long long now, int *frame);
+int  tlb_insert(int page, int frame, unsigned long long now);
+void tlb_invalidate(int page);
 
 #endif
